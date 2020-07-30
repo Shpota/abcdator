@@ -1,5 +1,11 @@
 plugins {
+    application
     kotlin("jvm") version "1.3.72"
+    id("com.github.johnrengelman.shadow") version "6.0.0"
+}
+
+application {
+    mainClassName = "com.sashashpota.MainKt"
 }
 
 group = "com.sashashpota"
@@ -11,6 +17,9 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    implementation("org.http4k:http4k-core:3.254.0")
+    implementation("org.http4k:http4k-server-jetty:3.254.0")
+    implementation("org.http4k:http4k-client-okhttp:3.254.0")
 }
 
 tasks {
@@ -19,5 +28,15 @@ tasks {
     }
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
+    }
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes(
+            mapOf(
+                "Main-Class" to application.mainClassName
+            )
+        )
     }
 }
