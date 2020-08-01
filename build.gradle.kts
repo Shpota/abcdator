@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "com.sashashpota.MainKt"
+    mainClassName = "com.sashashpota.HttpKt"
 }
 
 group = "com.sashashpota"
@@ -18,8 +18,8 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("org.http4k:http4k-core:3.254.0")
-    implementation("org.http4k:http4k-server-jetty:3.254.0")
-    implementation("org.http4k:http4k-client-okhttp:3.254.0")
+    implementation("org.http4k:http4k-contract:3.254.0")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.1.3")
 }
 
 tasks {
@@ -28,6 +28,9 @@ tasks {
     }
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
+    }
+    test {
+        useJUnitPlatform()
     }
 }
 
