@@ -48,9 +48,9 @@ fun execute(
     predicates: List<Pair<(Input) -> Boolean, H>>,
     formulas: Map<H, (Input) -> BigDecimal>
 ): Result {
-    for (pair in predicates) {
-        if (pair.first(input)) {
-            return Result(pair.second, formulas[pair.second]!!(input))
+    for ((predicate, h) in predicates) {
+        if (predicate(input)) {
+            return Result(h, formulas[h]!!(input))
         }
     }
     throw UnsupportedOperationException()
